@@ -1,0 +1,93 @@
+#------------------------------------------------------------------------------
+# plotするfileの指定
+#------------------------------------------------------------------------------
+
+file1 = "./result_sigma5.0_1st_mode.dat"
+file2 = "./result_sigma5.0_2nd_mode.dat"
+file3 = "./result_sigma5.0_3rd_mode.dat"
+file4 = "./result_sigma5.0_4th_mode.dat"
+file5 = "./result_sigma5.0_5th_mode.dat"
+file6 = "./result_sigma5.0_6th_mode.dat"
+
+#===============================================================================
+# 拡張子とfontの設定
+#===============================================================================
+
+#set term post eps solid color enhanced "Times-Roman, 24pt"
+set term post eps solid color enhanced "Helvetica, 24pt" size 5in,3.5in
+set size 0.8, 0.8
+
+set lmargin 10
+set rmargin 2
+
+#set term jpeg
+#set term pdf
+
+set tics
+
+#===============================================================================
+# plotするheight, nu_inの指定
+#===============================================================================
+# height = 0.03 - 0.001 * hh
+# nu_in  = 1.0  + 0.1   * nn  として、
+
+hh = 0
+#nn = 0
+#nn = 10
+#nn = 20
+nn = 0
+
+aaa = nn + 41 * hh
+
+#===============================================================================
+# 実周波数plotの設定
+#===============================================================================
+
+set label 1 "(a)" at -1.5,5 font "Helvetica, 32pt"
+show label 1
+
+set output "Fig1a_Frequency_h0.03_uniform.eps"
+
+#set title "\bar{\nu}_{in}=5.0"
+
+set yrange[0:5]
+set ylabel "2h{/Symbol w}/V_{AI}" #font"Helvetica,20"
+
+set xrange[0:5]
+set xlabel "{/Symbol a}" #font"Helvetica,20"
+
+unset key
+
+plot file1 every :::(aaa)::(aaa) u 3:1 w l lw 5 lc 8,\
+     file2 every :::(aaa)::(aaa) u 3:1 w l lw 5 lc 1,\
+     file3 every :::(aaa)::(aaa) u 3:1 w l lw 5 lc 2,\
+     file4 every :::(aaa)::(aaa) u 3:1 w l lw 5 lc 3,\
+     file5 every :::(aaa)::(aaa) u 3:1 w l lw 5 lc rgb "#fc7900",\
+     file6 every :::(aaa)::(aaa) u 3:1 w l lw 5 lc 7
+
+#===============================================================================
+# 成長率plotの設定
+#===============================================================================
+
+set label 2 "(b)" at -1.5,0.4 font "Helvetica, 32pt"
+show label 2
+
+set output "Fig1b_GrowthRate_h0.03_uniform.eps"
+
+#set title "\bar{\nu}_{in}=5.0"
+
+set yrange[-0.05:0.4]
+#set yrange[-0.05:0.35]
+set ylabel "2h{/Symbol g}/V_{AI}"# font"Helvetica,20"
+
+set xrange[0:5]
+set xlabel "{/Symbol a}" #font"Helvetica,20"
+
+unset key
+
+plot file1 every :::(aaa)::(aaa) u 3:2 w l lw 5 lc 8,\
+     file2 every :::(aaa)::(aaa) u 3:2 w l lw 5 lc 1,\
+     file3 every :::(aaa)::(aaa) u 3:2 w l lw 5 lc 2,\
+     file4 every :::(aaa)::(aaa) u 3:2 w l lw 5 lc 3,\
+     file5 every :::(aaa)::(aaa) u 3:2 w l lw 5 lc rgb "#fc7900",\
+     file6 every :::(aaa)::(aaa) u 3:2 w l lw 5 lc 7

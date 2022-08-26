@@ -1,0 +1,57 @@
+#------------------------------------------------------------------------------
+# plotするfileの指定
+#------------------------------------------------------------------------------
+
+file1 = "cal_z_eff2.dat"
+
+#===============================================================================
+# 拡張子とfontの設定
+#===============================================================================
+
+#set term post eps solid color enhanced "Times-Roman, 24pt"
+set term post eps solid color enhanced "Helvetica, 24pt" size 5in,3.5in
+set size 1.2, 0.8
+
+set lmargin 10
+set rmargin 20
+
+#set term jpeg
+#set term pdf
+
+set tics
+
+#===============================================================================
+# 実周波数plotの設定
+#===============================================================================
+
+#set label 1 "{/Symbol a} = 1, {/Symbol s} = 5, @^-{/Symbol n}_{in} = 1" at 0.2,0.90
+#set label 1 "{/Symbol a} = 1, {/Symbol s} = 5, h = 0.03" at 0.2,0.90
+#set label 1 "{/Symbol a} = 1, {/Symbol s} = 5" at 0.2,0.90
+set label 1 "{/Symbol s} = 5" at 0.2,0.90
+show label 1
+
+#set label 3 "@^-{/Symbol n}_{in} = 1" at 3.8,4.7
+#show label 3
+
+set output "Fig4_z_eff_key.eps"
+
+#set title "\bar{\nu}_{in}=5.0"
+
+#set yrange[0:5]
+#set ylabel "Z_{eff}"
+set ylabel "Z"
+
+set xrange[0:5]
+set yrange[-0.5:1]
+set xlabel "Re({/Symbol w})" #font"Helvetica,20"
+
+#unset key
+set key outside 
+
+plot file1 every :::0::0 u 1:3 t "Re(Z_{eff}), @^-{/Symbol n}_{in} = 1" w l lw 5 lc 1 ,\
+     file1 every :::0::0 u 1:4 t "Im(Z_{eff}), @^-{/Symbol n}_{in} = 1" w l lw 5 lc 1 dt ".",\
+     file1 every :::2::2 u 1:3 t "Re(Z_{eff}), @^-{/Symbol n}_{in} = 3" w l lw 5 lc 2 ,\
+     file1 every :::2::2 u 1:4 t "Im(Z_{eff}), @^-{/Symbol n}_{in} = 3" w l lw 5 lc 2 dt ".",\
+     file1 every :::4::4 u 1:3 t "Re(Z_{eff}), @^-{/Symbol n}_{in} = 5" w l lw 5 lc 3 ,\
+     file1 every :::4::4 u 1:4 t "Im(Z_{eff}), @^-{/Symbol n}_{in} = 5" w l lw 5 lc 3 dt "."
+
